@@ -20,3 +20,4 @@ def generate_user_data():
         "password": generate_random_password(),
         "name": generate_random_name()
     }
+    # update for PR
