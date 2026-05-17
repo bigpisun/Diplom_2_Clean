@@ -10,12 +10,11 @@ class TestOrderCreate:
 
     @allure.title("Создание заказа с авторизацией")
     def test_create_order_with_auth_success(self):
-        # Регистрируем пользователя
         user_data = generate_user_data()
         register_response = requests.post(f"{BASE_URL}{Endpoints.REGISTER}", json=user_data)
         assert register_response.status_code == 200
         token = register_response.json()["accessToken"]
-        
+
         headers = {"Authorization": token}
         response = requests.post(
             f"{BASE_URL}{Endpoints.CREATE_ORDER}",
@@ -34,7 +33,7 @@ class TestOrderCreate:
         assert response.status_code == 200
         assert response.json()["success"] is True
 
-    @allure.title("Создание заказа без ингредиентов возвращает ошибку")
+    @allure.title("Создание заказа без ингредиентов")
     def test_create_order_no_ingredients_fail(self):
         response = requests.post(
             f"{BASE_URL}{Endpoints.CREATE_ORDER}",
@@ -43,7 +42,7 @@ class TestOrderCreate:
         assert response.status_code == 400
         assert "must be provided" in response.json()["message"]
 
-    @allure.title("Создание заказа с неверным хешем ингредиента возвращает ошибку 500")
+    @allure.title("Создание заказа с неверным хешем ингредиента")
     def test_create_order_invalid_hash_fail(self):
         response = requests.post(
             f"{BASE_URL}{Endpoints.CREATE_ORDER}",

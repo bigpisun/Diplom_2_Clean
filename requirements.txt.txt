@@ -1,0 +1,6 @@
+$content = @'
+pytest
+requests
+allure-pytest
+'@
+Set-Content -Path requirements.txt -Value $content

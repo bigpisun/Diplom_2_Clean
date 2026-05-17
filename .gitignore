@@ -1,0 +1,6 @@
+# Временные файлы Python
+**/__pycache__/
+*.pyc
+
+# Результаты тестов Allure
+allure-results/

@@ -11,7 +11,7 @@ class TestUserLogin:
     def test_login_success(self):
         user_data = generate_user_data()
         requests.post(f"{BASE_URL}{Endpoints.REGISTER}", json=user_data)
-        
+
         response = requests.post(
             f"{BASE_URL}{Endpoints.LOGIN}",
             json={"email": user_data["email"], "password": user_data["password"]}
@@ -24,7 +24,7 @@ class TestUserLogin:
     def test_login_wrong_password_fail(self):
         user_data = generate_user_data()
         requests.post(f"{BASE_URL}{Endpoints.REGISTER}", json=user_data)
-        
+
         response = requests.post(
             f"{BASE_URL}{Endpoints.LOGIN}",
             json={"email": user_data["email"], "password": "wrong_password"}
